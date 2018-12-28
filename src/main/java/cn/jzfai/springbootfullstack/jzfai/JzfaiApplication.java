@@ -6,11 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.servlet.MultipartConfigElement;
 
+
+//@ImportResource(locations = {"classpath:spring01.xml"})  用于xml文件的注入
 @SpringBootApplication
 @ServletComponentScan//要使用Servlet filter listen  要加ServletComponentScan属性
 @MapperScan("cn.jzfai.springbootfullstack.jzfai.mapper")//扫面mapper包

@@ -6,10 +6,7 @@ import cn.jzfai.springbootfullstack.jzfai.services.impl.TUserServiceImpl;
 import cn.jzfai.springbootfullstack.jzfai.utils.JsonData;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.annotation.Resources;
@@ -26,7 +23,7 @@ public class TUserController {
      @Resource
      private TUserServiceImpl tUserService;
 
-     @PostMapping("/insert")
+     @GetMapping("/insert")
      Object insert(@RequestBody User user){
             int insertId=tUserService.insert(user);
             return JsonData.buildSuccess(insertId);

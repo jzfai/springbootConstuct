@@ -16,23 +16,40 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 
 @RunWith(SpringRunner.class)  //底层用junit  SpringJUnit4ClassRunner
 @SpringBootTest(classes={JzfaiApplication.class})//启动整个springboot工程
 @AutoConfigureMockMvc
 public class SpringBootTestDemo {
+	@Autowired
+	DataSource dataSource;
+
+
+
+
 	@Test
-	public void testOne(){
-		System.out.println("test hello 1");
-		TestCase.assertEquals(1, 1);
-		
+	public void testOne() throws SQLException {
+		System.out.println("dataSource的值");
+		System.out.println(dataSource.getClass());
+		Connection connection =dataSource.getConnection();
+		System.out.println(connection);
+
 	}
 	
 	@Test
 	public void testTwo(){
 		System.out.println("test hello 2");
 		TestCase.assertEquals(1, 1);
+	}
+
+
+	@Test
+	public void testDatasoutce(){
+
 	}
 
 

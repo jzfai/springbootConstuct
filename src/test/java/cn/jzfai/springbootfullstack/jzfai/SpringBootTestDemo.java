@@ -1,5 +1,6 @@
 package cn.jzfai.springbootfullstack.jzfai;
 
+import cn.jzfai.springbootfullstack.JzfaiApplication;
 import junit.framework.TestCase;
 
 import org.junit.After;

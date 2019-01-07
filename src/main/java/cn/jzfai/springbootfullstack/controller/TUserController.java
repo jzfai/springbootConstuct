@@ -1,0 +1,56 @@
+package cn.jzfai.springbootfullstack.controller;
+
+import cn.jzfai.springbootfullstack.domain.User;
+import cn.jzfai.springbootfullstack.exception.MyException;
+import cn.jzfai.springbootfullstack.services.impl.TUserServiceImpl;
+import cn.jzfai.springbootfullstack.utils.JsonData;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.annotation.Resources;
+
+/**
+ * @program: jizhifai
+ * @description: 用户列表控制器
+ * @author: jzfai
+ * @create: 2018-10-26 00:57
+ **/
+@RestController
+@RequestMapping("tUser")
+public class TUserController {
+     @Resource
+     private TUserServiceImpl tUserService;
+
+     @PostMapping("/insert")
+     Object insert(@RequestBody User user){
+            int insertId=tUserService.insert(user);
+            return JsonData.buildSuccess(insertId);
+     }
+
+     @PostMapping("/getAll")
+     Object getAll(){
+         Object listArray=tUserService.getAll();
+         return JsonData.buildSuccess(listArray);
+     }
+
+    @PostMapping("/deleteAll")
+        /*开启事物*/
+    @Transactional(propagation= Propagation.REQUIRED)
+    Object deleteAll(){
+        Object listArray= null;
+        try {
+            listArray = tUserService.deleteByUid(16);
+            listArray=tUserService.deleteByUid(14);
+            listArray=tUserService.deleteByUid(9);
+        } catch (RuntimeException e) {
+            System.out.println("controller异常");
+            throw new MyException("msg","删除失败");
+        }
+        return JsonData.buildSuccess(listArray);
+    }
+}
